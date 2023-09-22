@@ -1,5 +1,6 @@
 # 인프런 크롤링
 import time
+import schedule
 import re
 import sys
 from selenium import webdriver
@@ -9,15 +10,15 @@ from selenium.common.exceptions import NoSuchElementException
 
 import os
 # Python이 실행될 때 DJANGO_SETTINGS_MODULE이라는 환경 변수에 현재 프로젝트의 settings.py파일 경로를 등록한다.
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
-import django
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
+# import django
 # 이제 장고를 가져와 장고 프로젝트를 사용할 수 있도록 환경을 만든다.
-django.setup()
+# django.setup()
 
 from posts.models import Post
 
 
-def get_all_results():
+def get_inflearn_results():
     driver = webdriver.Chrome()
 
     # 검색할 키워드
@@ -105,9 +106,10 @@ def get_all_results():
     #print(all_results)
     return all_results
 
+"""
 if __name__ == '__main__':
-    data_dict = get_all_results()
-    
+    data_dict = get_inflearn_results()
+
     for result_list in data_dict:
         for dic in result_list:
             n = dic['lesson_title']
@@ -115,6 +117,8 @@ if __name__ == '__main__':
             img = dic['image']
             p = dic['price']
             f = dic['field']
-            
-            Post(lesson_title=n, site_url=u, image=img, price=p, field=f).save()
-
+                
+            # 이미 존재하는 데이터인지 확인 후 저장
+            if not Post.objects.filter(lesson_title=n, site_url=u, image=img, price=p, field=f).exists():
+                Post(lesson_title=n, site_url=u, image=img, price=p, field=f).save()
+"""

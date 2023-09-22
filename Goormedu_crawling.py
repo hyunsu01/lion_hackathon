@@ -1,3 +1,4 @@
+# Goormedu_crawling.py
 # 구름 EDU 크롤링
 
 import os
@@ -12,15 +13,14 @@ from selenium.common.exceptions import NoSuchElementException
 
 import os
 # Python이 실행될 때 DJANGO_SETTINGS_MODULE이라는 환경 변수에 현재 프로젝트의 settings.py파일 경로를 등록한다.
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
-import django
-
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
+# import django
 
 # 이제 장고를 가져와 장고 프로젝트를 사용할 수 있도록 환경을 만든다.
-django.setup()
+# django.setup()
 from posts.models import Post
 
-def get_all_results():
+def get_goormedu_results():
 
     driver = webdriver.Chrome()
     # 검색할 키워드 
@@ -45,7 +45,7 @@ def get_all_results():
         search_input.send_keys(Keys.ENTER)
 
         result = []
-        time.sleep(40)
+        time.sleep(15)
         list_items = driver.find_elements(By.CSS_SELECTOR,'a._1xnzzp._1MfH_h')
         
         count = 0
@@ -108,9 +108,9 @@ def get_all_results():
     # Selenium이 사용한 브라우저를 닫습니다.
     driver.quit()
     return all_results
-
+"""
 if __name__ == '__main__':
-    data_dict = get_all_results()
+    data_dict = get_goormedu_results()
     
     for result_list in data_dict:
         for dic in result_list:
@@ -120,4 +120,7 @@ if __name__ == '__main__':
             p = dic['price']
             f = dic['field']
             
-            Post(lesson_title=n, site_url=u, image=img, price=p, field=f).save()
+            # 이미 존재하는 데이터인지 확인 후 저장
+            if not Post.objects.filter(lesson_title=n, site_url=u).exists():
+                Post(lesson_title=n, site_url=u, image=img, price=p, field=f).save()
+"""
