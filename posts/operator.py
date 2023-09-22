@@ -70,6 +70,6 @@ def start():
     # scheduler.add_job(daily_crawl, 'cron', minute='*/15', id='daily_crawl_15min')
     
     # 매일 특정 시각에 작업을 예약합니다.
-    # scheduler.add_job(daily_crawl, 'cron', hour=1, minute=33, second=10, id='daily_crawl')
+    # scheduler.add_job(daily_crawl, 'cron', hour=11, minute=28, second=50, id='daily_crawl')
 
     scheduler.start()
