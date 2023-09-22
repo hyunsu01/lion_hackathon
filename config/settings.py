@@ -44,7 +44,7 @@ MIDDLEWARE = [
 ]
 
 # CORS 관련 추가
-CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:3000', 'http://localhost:3000']
+CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:3000', 'http://localhost:3000', 'http://www.gguldangi.store']
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'config.urls'
@@ -123,4 +123,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # django-apscheduler 관련
 APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"  # Default
 SCHEDULER_DEFAULT = True
-# APSCHEDULER_RUN_NOW_TIMEOUT = 25
+# APSCHEDULER_RUN_NOW_TIMEOUT = 25 
